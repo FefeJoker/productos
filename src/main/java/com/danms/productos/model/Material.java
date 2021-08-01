@@ -1,27 +1,49 @@
 package com.danms.productos.model;
 
-
 import javax.persistence.*;
 
 @Entity
-public class Producto {
+public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
+    private String descripcion;
     private Double precio;
-    private String descripcion_prod;
     private Integer stockActual;
     private Integer stockMinimo;
     @OneToOne
     private Unidad unidad;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public String getDescripcion() {
-        return descripcion_prod;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion_prod = descripcion;
+        this.descripcion = descripcion;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
     public Integer getStockActual() {
@@ -40,30 +62,4 @@ public class Producto {
         this.stockMinimo = stockMinimo;
     }
 
-    public void setUnidad(Unidad unidad) {
-        this.unidad = unidad;
-    }
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
 }
