@@ -1,9 +1,10 @@
 package com.danms.productos.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
-public class DetallePedido {
+public class DetallePedido implements Serializable {
     private Integer id;
     private Integer cantidad;
     private Producto producto;
