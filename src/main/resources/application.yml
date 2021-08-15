@@ -1,5 +1,14 @@
-zuul:
-  routes:
-    foos:
-      path: /productos/**
-      url: http://localhost:8081/spring-zuul-foos-resource/foos
+spring:
+  application:
+    name: producto-service
+  cloud:
+    consul:
+      host: 104.198.16.92
+      port: 8500
+      discovery:
+        ip-address: fehler.gregoret.com.ar
+
+  output.ansi.enabled: ALWAYS
+
+server:
+  port: 9002

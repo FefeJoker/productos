@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: producto-service
+  cloud:
+    consul:
+      host: fehler.gregoret.com.ar
+      port: 8500
+      discovery:
+        instance-id: "productos-service"
+        prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+
+server:
+  port: 0
