@@ -16,7 +16,7 @@ public class MovimientosStock {
     @OneToOne
     private DetalleProvision detalleProvision;
 
-    //private DetallePedido detallePedido;
+    private DetallePedido detallePedido;
 
 
     public Integer getId() {
@@ -51,6 +51,27 @@ public class MovimientosStock {
         this.fecha = fecha;
     }
 
+    public Producto getProducto() {
+        return producto;
+    }
 
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
+    public DetalleProvision getDetalleProvision() {
+        return detalleProvision;
+    }
+
+    public void setDetalleProvision(DetalleProvision detalleProvision) {
+        this.detalleProvision = detalleProvision;
+    }
+
+    public DetallePedido getDetallePedido() {
+        return detallePedido;
+    }
+
+    public void setDetallePedido(DetallePedido detallePedido) {
+        this.detallePedido = detallePedido;
+    }
 }

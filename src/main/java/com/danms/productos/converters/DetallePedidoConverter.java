@@ -1,6 +1,9 @@
 package com.danms.productos.converters;
 
 import com.danms.productos.model.DetallePedido;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.persistence.AttributeConverter;
 
@@ -13,10 +16,15 @@ public class DetallePedidoConverter implements AttributeConverter<DetallePedido,
 
     @Override
     public DetallePedido convertToEntityAttribute(Integer idCliente) {
-        //TODO
-        //Traer el cliente del microservicio de usuarios
-        DetallePedido detalle = new DetallePedido();
-        detalle.setId(idCliente);
-        return detalle;
+        String url = "http://localhost:9000/" + "api";
+        WebClient client = WebClient.create(url);
+        ResponseEntity<DetallePedido> result = client.get()
+                .uri("/api/cliente/{id}", idCliente).accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(DetallePedido.class)
+                .or(null)
+                .block();
+
+        return result.getBody();
     }
 }
