@@ -49,4 +49,16 @@ public class ProductoController {
         return ResponseEntity.ok(guardado);
     }
 
+    @GetMapping("/{id}/{cantidad}")
+    public ResponseEntity<Boolean> hayStock(@PathVariable Integer id, @PathVariable Integer cantidad){
+        Producto pDb = productoService.getProductoById(id).orElse(null);
+
+        if(pDb == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        Boolean result = pDb.getStockActual() >= cantidad;
+
+        return ResponseEntity.ok(result);
+    }
 }
