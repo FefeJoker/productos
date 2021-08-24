@@ -3,7 +3,7 @@ spring:
     name: producto-service
   cloud:
     consul:
-      host: fehler.gregoret.com.ar
+      host: backend.fehler.gregoret.com.ar
       port: 8500
       discovery:
         instance-id: "productos-service"
