@@ -16,7 +16,7 @@ public class DetallePedidoConverter implements AttributeConverter<DetallePedido,
 
     @Override
     public DetallePedido convertToEntityAttribute(Integer idCliente) {
-        String url = "http://localhost:9000/" + "api";
+        String url = "http://backend.fehler.gregoret.com.ar:8085/usuarios-service" + "api";
         WebClient client = WebClient.create(url);
         ResponseEntity<DetallePedido> result = client.get()
                 .uri("/api/cliente/{id}", idCliente).accept(MediaType.APPLICATION_JSON)

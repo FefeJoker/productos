@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.danms.productos.services.ProductoService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/producto")
 public class ProductoController {
 
@@ -31,7 +33,7 @@ public class ProductoController {
         Producto prod = new Producto();
         Unidad unidad = new Unidad();
 
-        prod.setDescripcion(pu.getDescripcion_prod());
+        prod.setDescripcion_prod(pu.getDescripcion_prod());
         prod.setStockActual(pu.getStockActual());
         prod.setStockMinimo(pu.getStockMinimo());
         prod.setPrecio(pu.getPrecio());
@@ -60,5 +62,10 @@ public class ProductoController {
         Boolean result = pDb.getStockActual() >= cantidad;
 
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Producto>> getAll(){
+        return ResponseEntity.ok(productoService.getAll());
     }
 }

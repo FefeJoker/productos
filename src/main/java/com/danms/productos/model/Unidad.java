@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Unidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String descripcion_unidad;
 

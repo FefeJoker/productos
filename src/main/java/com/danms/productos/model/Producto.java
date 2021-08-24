@@ -13,36 +13,10 @@ public class Producto {
     private String descripcion_prod;
     private Integer stockActual;
     private Integer stockMinimo;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "unidad_id", updatable = false)
     private Unidad unidad;
 
-    public String getDescripcion() {
-        return descripcion_prod;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion_prod = descripcion;
-    }
-
-    public Integer getStockActual() {
-        return stockActual;
-    }
-
-    public void setStockActual(Integer stockActual) {
-        this.stockActual = stockActual;
-    }
-
-    public Integer getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(Integer stockMinimo) {
-        this.stockMinimo = stockMinimo;
-    }
-
-    public void setUnidad(Unidad unidad) {
-        this.unidad = unidad;
-    }
     public Integer getId() {
         return id;
     }
@@ -65,5 +39,37 @@ public class Producto {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public String getDescripcion_prod() {
+        return descripcion_prod;
+    }
+
+    public void setDescripcion_prod(String descripcion_prod) {
+        this.descripcion_prod = descripcion_prod;
+    }
+
+    public Integer getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(Integer stockActual) {
+        this.stockActual = stockActual;
+    }
+
+    public Integer getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(Integer stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public Unidad getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(Unidad unidad) {
+        this.unidad = unidad;
     }
 }
