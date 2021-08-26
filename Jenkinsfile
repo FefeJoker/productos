@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('permissions setup'){
             steps{
-                sh 'chmod 777 -R /var/lib/jenkins/workspace/Microservicio_de_Productos_develop'
+                sh 'chmod 777 -R /var/lib/jenkins/workspace/Microservicio_de_Productos_main'
             }
         }
         stage('clean') {
