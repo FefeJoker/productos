@@ -6,9 +6,9 @@ spring:
       host: backend.fehler.gregoret.com.ar
       port: 8500
       discovery:
-        ip-address: backend.fehler.gregoret.com.ar
+        ip-address: 10.128.0.2
 
   output.ansi.enabled: ALWAYS
 
-server:
-  port: 9002
+#server:
+#  port: 9002

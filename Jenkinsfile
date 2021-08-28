@@ -27,46 +27,34 @@ pipeline {
                 sh "echo buildeando develop"
             }
         }
-        stage('dockershit') {
+        stage('maven install and docker build') {
             steps {
                 sh "mvn clean install"
                 sh "mvn clean package spring-boot:repackage"
                 sh "docker build -t guillegregoret/producto ."
-                sh 'docker ps -f name=producto-service -q | xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a -fname=producto-service -q | xargs -r docker container rm'
-                sh "docker run -d --name producto-service -p 9002:9002 guillegregoret/producto"
             }
         }
-        /*stage('analisis estatico') {
+        stage('docker run mirror 1') {
             steps {
-                sh "./mvnw site"
-                sh "./mvnw checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
+                sh 'docker ps -f name=producto-service-1 -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=producto-service-1 -q | xargs -r docker container rm'
+                sh "docker run -d --name producto-service-1 -it --cpu-shares='256' --memory='512m' --network host  guillegregoret/producto"
             }
-        }*/
-    }
-    post {
-        success{
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
-        always{
-            archiveArtifacts artifacts: '**/target/site/**', fingerprint: true
-            publishHTML([allowMissing: false,
-                         alwaysLinkToLastBuild: true,
-                         keepAll: true,
-                         reportDir: 'target/site',
-                         reportFiles: 'index.html',
-                         reportName: 'Site'
-            ])
-            junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-            jacoco ( execPattern: 'target/jacoco.exec')
-            recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-            recordIssues enabledForFailure: true, tools: [checkStyle()]
-            recordIssues enabledForFailure: true, tools: [spotBugs()]
-            recordIssues enabledForFailure: true, tools: [cpd(pattern: '**/target/cpd.xml')]
-            recordIssues enabledForFailure: true, tools: [pmdParser(pattern: '**/target/pmd.xml')]
+        stage('docker run mirror 2') {
+            steps {
+                sh 'docker ps -f name=producto-service-2 -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=producto-service-2 -q | xargs -r docker container rm'
+                sh "docker run -d --name producto-service-2 -it --cpu-shares='256' --memory='512m' --network host  guillegregoret/producto"
+            }
         }
-    }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+        stage('docker run mirror 3') {
+            steps {
+                sh 'docker ps -f name=producto-service-3 -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=producto-service-3 -q | xargs -r docker container rm'
+                sh "docker run -d --name producto-service-3 -it --cpu-shares='256' --memory='512m' --network host  guillegregoret/producto"
+            }
+        }
+        }
     }
 }
