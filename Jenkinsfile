@@ -55,6 +55,5 @@ pipeline {
                 sh "docker run -d --name producto-service-3 -it --cpu-shares='256' --memory='512m' --network host  guillegregoret/producto"
             }
         }
-        }
     }
 }
